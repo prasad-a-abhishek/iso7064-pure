@@ -180,4 +180,40 @@ Per cycle_124 #842 LESSON (TYPE-2 orchestrator-recovery: synthesize deliverable 
 
 ---
 
+## cycle_138/qa-reverify — fix1 verification (commit f2d708e + V4 honesty commit a752ca9)
+
+**Scope.** Verify cycle_138/fix1 (commit f2d708e, parent t_5b52da07) remediates
+the @repo-adversary FUZZING_REPORT (commit 495adc4) High findings F-001 + F-002
+(both reproducer of V001: MOD_11_2 X-in-body raises raw `ValueError`,
+violating SPEC §6 AC9). Also close the version-sync honesty gap identified
+by the orchestrator in tick #1001 (commit a752ca9 on this branch).
+
+### Sub-check results (8/8 PASS)
+
+| # | Sub-check | Result |
+|---|---|---|
+| 1 | F-001 reproducer (`compute('X794', mode='MOD_11_2')`) | PASS — raises `ISO7064Error` from `iso7064_pure._systems` (not raw `ValueError`); stderr names position 0 |
+| 2 | F-002 reproducer (`compute('1234X567', mode='MOD_11_2')`) | PASS — raises `ISO7064Error`; stderr names position 4 |
+| 3 | AC3 no-regression (`compute('030640615')` → `'0306406152'`; `verify('043942089X')` is True) | PASS — exit 0, both asserts pass |
+| 4 | Full pytest (`PYTHONPATH=src python3 -m pytest tests/ -q`) | PASS — `214 passed in 0.30s`, exit 0 |
+| 5 | CLI smoke (X-in-body: `python3 -m iso7064_pure compute 'X794' --mode MOD_11_2`) | PASS — exit 2, clean stderr (no Python traceback), names "check character 'X' (value 10) is not allowed in the body of MOD_11_2 ... Got body containing 'X' at position 0" |
+| 6 | CLI smoke (valid: `compute '030640615' --mode MOD_11_2`) | PASS — exit 0, stdout `0306406152` |
+| 7 | Fresh-venv install (`/tmp/c138_qarev_venv`) + import + compute | PASS — `pip install --quiet -e .` exits 0; `python -c "from iso7064_pure import compute; print(compute('030640615', mode='MOD_11_2'))"` prints `0306406152` exit 0 |
+| 8 | Secret scan (`git grep -nE 'ghp_\|pypi-AgEI\|npm_\|sk-\|AKIA\|Bearer ey\|BEGIN PRIVATE KEY' -- ':!*.md' ':!*.lock'`) | PASS — 0 hits |
+
+### Honesty-sync (V4)
+
+**Pre-qareverify state:** pyproject.toml=`0.1.1`, `__init__.py.__version__`=`0.1.0`, README badge=`0.1.0`.
+
+**Fix applied:** commit `a752ca9` —
+`honesty(iso7064): cycle_138/qa-reverify — sync version to 0.1.1 in __init__.py + README badge`
+(2 lines changed total: `src/iso7064_pure/__init__.py` + `README.md`).
+
+**Post-qareverify state:** all three files now read `0.1.1` (verified post-commit via
+`grep -E '^version' pyproject.toml` / `grep -E '__version__' src/iso7064_pure/__init__.py` /
+`grep -E 'version-0\.1\.' README.md` — all return `0.1.1`). CHANGELOG.md was already at
+`0.1.1` (cycle_138/fix1 authored it) — untouched.
+
+### Decision
+
 VERDICT: SHIP
