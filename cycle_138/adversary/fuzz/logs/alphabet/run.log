@@ -1,0 +1,42 @@
+INFO: Instrumenting iso7064_pure
+INFO: Instrumenting iso7064_pure._alphabet
+INFO: Instrumenting iso7064_pure._systems
+INFO: Using built-in libfuzzer
+WARNING: Failed to find function "__sanitizer_acquire_crash_state".
+WARNING: Failed to find function "__sanitizer_print_stack_trace".
+WARNING: Failed to find function "__sanitizer_set_death_callback".
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 3665835500
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 4096 bytes
+INFO: A corpus is not provided, starting from an empty corpus
+#2	INITED cov: 30 ft: 30 corp: 1/1b exec/s: 0 rss: 42Mb
+#4	NEW    cov: 34 ft: 34 corp: 2/4b lim: 4 exec/s: 0 rss: 42Mb L: 3/3 MS: 2 CMP-ShuffleBytes- DE: "\001\000"-
+#8	NEW    cov: 34 ft: 40 corp: 3/8b lim: 4 exec/s: 0 rss: 42Mb L: 4/4 MS: 4 InsertByte-CMP-CrossOver-CopyPart- DE: "\000\000"-
+#11	NEW    cov: 48 ft: 54 corp: 4/12b lim: 4 exec/s: 0 rss: 42Mb L: 4/4 MS: 3 CopyPart-ChangeBit-ChangeBit-
+#12	NEW    cov: 55 ft: 61 corp: 5/16b lim: 4 exec/s: 0 rss: 42Mb L: 4/4 MS: 1 ChangeByte-
+#13	NEW    cov: 55 ft: 63 corp: 6/20b lim: 4 exec/s: 0 rss: 42Mb L: 4/4 MS: 1 ChangeByte-
+#18	NEW    cov: 60 ft: 69 corp: 7/23b lim: 4 exec/s: 0 rss: 42Mb L: 3/4 MS: 5 ShuffleBytes-CopyPart-EraseBytes-EraseBytes-PersAutoDict- DE: "\000\000"-
+#22	NEW    cov: 60 ft: 71 corp: 8/27b lim: 4 exec/s: 0 rss: 42Mb L: 4/4 MS: 4 InsertByte-CrossOver-ChangeBinInt-ShuffleBytes-
+#41	REDUCE cov: 60 ft: 71 corp: 8/26b lim: 4 exec/s: 0 rss: 42Mb L: 3/4 MS: 4 ChangeBit-ChangeBit-ShuffleBytes-EraseBytes-
+#43	NEW    cov: 62 ft: 73 corp: 9/30b lim: 4 exec/s: 0 rss: 42Mb L: 4/4 MS: 2 InsertByte-ChangeBinInt-
+#49	NEW    cov: 63 ft: 74 corp: 10/34b lim: 4 exec/s: 0 rss: 42Mb L: 4/4 MS: 1 ChangeByte-
+#59	NEW    cov: 64 ft: 75 corp: 11/38b lim: 4 exec/s: 0 rss: 42Mb L: 4/4 MS: 5 PersAutoDict-ChangeByte-ChangeByte-InsertByte-ChangeBinInt- DE: "\001\000"-
+#106	REDUCE cov: 64 ft: 75 corp: 11/37b lim: 4 exec/s: 0 rss: 42Mb L: 3/4 MS: 2 ShuffleBytes-EraseBytes-
+#142	REDUCE cov: 64 ft: 75 corp: 11/35b lim: 4 exec/s: 0 rss: 42Mb L: 2/4 MS: 1 EraseBytes-
+#162	REDUCE cov: 64 ft: 75 corp: 11/34b lim: 4 exec/s: 0 rss: 42Mb L: 3/4 MS: 5 CopyPart-CrossOver-ChangeBit-ShuffleBytes-EraseBytes-
+#163	NEW    cov: 64 ft: 77 corp: 12/38b lim: 4 exec/s: 0 rss: 42Mb L: 4/4 MS: 1 InsertByte-
+#189	REDUCE cov: 64 ft: 77 corp: 12/37b lim: 4 exec/s: 0 rss: 42Mb L: 2/4 MS: 1 EraseBytes-
+#206	REDUCE cov: 64 ft: 77 corp: 12/36b lim: 4 exec/s: 0 rss: 42Mb L: 3/4 MS: 2 ChangeBinInt-EraseBytes-
+#270	REDUCE cov: 64 ft: 77 corp: 12/35b lim: 4 exec/s: 0 rss: 42Mb L: 2/4 MS: 4 ChangeBinInt-ShuffleBytes-EraseBytes-ShuffleBytes-
+#284	REDUCE cov: 64 ft: 77 corp: 12/34b lim: 4 exec/s: 0 rss: 42Mb L: 3/4 MS: 4 PersAutoDict-ChangeBit-EraseBytes-ChangeBit- DE: "\001\000"-
+#475	REDUCE cov: 64 ft: 77 corp: 12/33b lim: 4 exec/s: 0 rss: 42Mb L: 2/4 MS: 1 EraseBytes-
+#586	REDUCE cov: 64 ft: 77 corp: 12/32b lim: 4 exec/s: 0 rss: 42Mb L: 1/4 MS: 1 EraseBytes-
+#621	REDUCE cov: 64 ft: 77 corp: 12/30b lim: 4 exec/s: 0 rss: 42Mb L: 2/4 MS: 5 ShuffleBytes-ChangeBinInt-CopyPart-EraseBytes-ChangeByte-
+#651	REDUCE cov: 64 ft: 77 corp: 12/29b lim: 4 exec/s: 0 rss: 42Mb L: 2/4 MS: 5 PersAutoDict-ChangeBinInt-ChangeBit-InsertByte-EraseBytes- DE: "\001\000"-
+#680	REDUCE cov: 64 ft: 77 corp: 12/28b lim: 4 exec/s: 0 rss: 42Mb L: 2/4 MS: 4 ShuffleBytes-ShuffleBytes-CopyPart-EraseBytes-
+#691	REDUCE cov: 64 ft: 77 corp: 12/27b lim: 4 exec/s: 0 rss: 42Mb L: 1/4 MS: 1 EraseBytes-
+#718	REDUCE cov: 64 ft: 77 corp: 12/26b lim: 4 exec/s: 0 rss: 42Mb L: 1/4 MS: 2 ChangeByte-EraseBytes-
+#769	REDUCE cov: 64 ft: 77 corp: 12/25b lim: 4 exec/s: 0 rss: 42Mb L: 1/4 MS: 1 EraseBytes-
+#836	REDUCE cov: 64 ft: 77 corp: 12/24b lim: 4 exec/s: 0 rss: 42Mb L: 1/4 MS: 2 ChangeBit-EraseBytes-
+#975	REDUCE cov: 64 ft: 77 corp: 12/23b lim: 4 exec/s: 0 rss: 42Mb L: 1/4 MS: 4 CopyPart-ChangeBit-ChangeBit-EraseBytes-
+Done 2000 in 0 second(s)

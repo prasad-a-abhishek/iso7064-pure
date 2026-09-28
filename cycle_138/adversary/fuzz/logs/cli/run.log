@@ -1,0 +1,26 @@
+INFO: Using built-in libfuzzer
+WARNING: Failed to find function "__sanitizer_acquire_crash_state".
+WARNING: Failed to find function "__sanitizer_print_stack_trace".
+WARNING: Failed to find function "__sanitizer_set_death_callback".
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1911995391
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 4096 bytes
+INFO: A corpus is not provided, starting from an empty corpus
+#2	INITED cov: 18 ft: 18 corp: 1/1b exec/s: 0 rss: 43Mb
+#3	NEW    cov: 22 ft: 22 corp: 2/2b lim: 4 exec/s: 0 rss: 43Mb L: 1/1 MS: 1 ChangeByte-
+#7	NEW    cov: 29 ft: 29 corp: 3/4b lim: 4 exec/s: 0 rss: 43Mb L: 2/2 MS: 4 ChangeBit-ShuffleBytes-CopyPart-CopyPart-
+#12	NEW    cov: 36 ft: 36 corp: 4/8b lim: 4 exec/s: 0 rss: 43Mb L: 4/4 MS: 5 CrossOver-EraseBytes-ChangeByte-CopyPart-ChangeByte-
+#35	NEW    cov: 37 ft: 37 corp: 5/12b lim: 4 exec/s: 0 rss: 43Mb L: 4/4 MS: 3 CopyPart-CopyPart-ChangeByte-
+#37	REDUCE cov: 37 ft: 37 corp: 5/11b lim: 4 exec/s: 0 rss: 43Mb L: 3/4 MS: 2 ChangeByte-EraseBytes-
+#41	NEW    cov: 42 ft: 42 corp: 6/14b lim: 4 exec/s: 0 rss: 43Mb L: 3/4 MS: 4 CrossOver-ChangeByte-ChangeByte-ShuffleBytes-
+#48	NEW    cov: 46 ft: 46 corp: 7/16b lim: 4 exec/s: 0 rss: 43Mb L: 2/4 MS: 2 CrossOver-ChangeByte-
+#55	NEW    cov: 52 ft: 52 corp: 8/18b lim: 4 exec/s: 0 rss: 43Mb L: 2/4 MS: 2 ChangeByte-CMP- DE: "\001\000"-
+#58	REDUCE cov: 56 ft: 56 corp: 9/21b lim: 4 exec/s: 58 rss: 43Mb L: 3/4 MS: 3 ChangeBit-ChangeBit-ChangeBit-
+#92	NEW    cov: 60 ft: 60 corp: 10/25b lim: 4 exec/s: 92 rss: 43Mb L: 4/4 MS: 4 InsertByte-ChangeByte-PersAutoDict-CrossOver- DE: "\001\000"-
+#108	NEW    cov: 63 ft: 63 corp: 11/28b lim: 4 exec/s: 108 rss: 43Mb L: 3/4 MS: 1 ChangeBit-
+#124	REDUCE cov: 63 ft: 63 corp: 11/27b lim: 4 exec/s: 62 rss: 43Mb L: 2/4 MS: 1 EraseBytes-
+#128	pulse  cov: 63 ft: 63 corp: 11/27b lim: 4 exec/s: 64 rss: 43Mb
+#146	NEW    cov: 67 ft: 67 corp: 12/31b lim: 4 exec/s: 73 rss: 43Mb L: 4/4 MS: 2 ChangeBit-InsertByte-
+#165	REDUCE cov: 67 ft: 67 corp: 12/30b lim: 4 exec/s: 82 rss: 43Mb L: 2/4 MS: 4 InsertByte-ShuffleBytes-CrossOver-CopyPart-
+#256	pulse  cov: 67 ft: 67 corp: 12/30b lim: 4 exec/s: 64 rss: 43Mb
+Done 300 in 5 second(s)

@@ -1,0 +1,88 @@
+{
+  "cycle_id": 138,
+  "phase": "T2_harnesses",
+  "worker_session_id": "20260928_08xxxx_xxxxxx",
+  "asan_ubsan_enabled": true,
+  "asan_ubsan_note": "Atheris ships its own coverage instrumentation. libFuzzer internal symbols (__sanitizer_acquire_crash_state / __sanitizer_print_stack_trace / __sanitizer_set_death_callback) are not linked into CPython, hence the standard libFuzzer 'WARNING: Failed to find function' messages — these are NOT a sanitiser disablement, just absent libFuzzer hooks; Atheris's native coverage shim is active (see cov:/ft: growth in run logs).",
+  "per_surface": {
+    "alphabet": {
+      "harness": "harness_alphabet.py",
+      "wall_budget_seconds": 5,
+      "iterations": 2000,
+      "cov_edges": 64,
+      "cov_features": 77,
+      "corpus_inputs": 12,
+      "crashes": 0,
+      "hangs": 0,
+      "oom": 0,
+      "log": "logs/alphabet/run.log"
+    },
+    "compute": {
+      "harness": "harness_compute.py",
+      "wall_budget_seconds": 5,
+      "iterations": 5000,
+      "cov_edges": 216,
+      "cov_features": 421,
+      "corpus_inputs": 82,
+      "crashes": 0,
+      "hangs": 0,
+      "oom": 0,
+      "log": "logs/compute/run.log"
+    },
+    "per_system": {
+      "harness": "harness_per_system.py",
+      "wall_budget_seconds": 5,
+      "iterations": 3000,
+      "cov_edges": 183,
+      "cov_features": 230,
+      "corpus_inputs": 20,
+      "crashes": 1,
+      "hangs": 0,
+      "oom": 0,
+      "crash_reproducer": "crashes/per_system/crash-1ae44bdd97c5f7690dce1dd14f2083e5451a52da",
+      "crash_summary": "MOD_11_2.compute('X794') raises raw ValueError instead of ISO7064Error — VULN_AUDIT T1 High finding reproduced by fuzzer (SPEC §6 AC9 violation).",
+      "log": "logs/per_system/run.log"
+    },
+    "verify": {
+      "harness": "harness_verify.py",
+      "wall_budget_seconds": 5,
+      "iterations": 5000,
+      "cov_edges": 199,
+      "cov_features": 413,
+      "corpus_inputs": 78,
+      "crashes": 0,
+      "hangs": 0,
+      "oom": 0,
+      "log": "logs/verify/run.log"
+    },
+    "cli": {
+      "harness": "harness_cli.py",
+      "wall_budget_seconds": 8,
+      "iterations": 300,
+      "cov_edges": 67,
+      "cov_features": 67,
+      "corpus_inputs": 12,
+      "crashes": 0,
+      "hangs": 0,
+      "oom": 0,
+      "note": "Subprocess-spawning harness; iteration count is intentionally low because each iteration invokes a fresh `python -m iso7064_pure` process.",
+      "log": "logs/cli/run.log"
+    }
+  },
+  "totals": {
+    "surfaces_covered": 5,
+    "harness_paths": [
+      "cycle_138/adversary/fuzz/harness_compute.py",
+      "cycle_138/adversary/fuzz/harness_per_system.py",
+      "cycle_138/adversary/fuzz/harness_alphabet.py",
+      "cycle_138/adversary/fuzz/harness_verify.py",
+      "cycle_138/adversary/fuzz/harness_cli.py"
+    ],
+    "total_iterations_5s_budget": 15300,
+    "total_corpus_inputs": 204,
+    "total_crashes": 1,
+    "total_hangs": 0,
+    "total_oom": 0,
+    "all_surfaces_clean_except_known_T1_finding": true
+  }
+}
