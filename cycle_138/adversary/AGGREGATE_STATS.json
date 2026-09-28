@@ -1,0 +1,88 @@
+{
+  "cycle_id": 138,
+  "phase": "T3_corpus_run",
+  "started_at": "2026-09-28T08:42:30Z",
+  "ended_at": "2026-09-28T08:52:30Z",
+  "wall_budget_per_surface_seconds": 300,
+  "surfaces": {
+    "compute": {
+      "iters_total": 25680711,
+      "crashes_total": 0,
+      "hangs_total": 0,
+      "oom_total": 0,
+      "oracle_mismatches_total": 0,
+      "duration_seconds": 301
+    },
+    "per_system": {
+      "iters_total": 0,
+      "crashes_total": 2,
+      "hangs_total": 0,
+      "oom_total": 0,
+      "oracle_mismatches_total": 2,
+      "duration_seconds": 46
+    },
+    "alphabet": {
+      "iters_total": 27407132,
+      "crashes_total": 0,
+      "hangs_total": 0,
+      "oom_total": 0,
+      "oracle_mismatches_total": 0,
+      "duration_seconds": 301
+    },
+    "verify": {
+      "iters_total": 21308624,
+      "crashes_total": 0,
+      "hangs_total": 0,
+      "oom_total": 0,
+      "oracle_mismatches_total": 0,
+      "duration_seconds": 301
+    },
+    "cli": {
+      "iters_total": 21205,
+      "crashes_total": 0,
+      "hangs_total": 0,
+      "oom_total": 0,
+      "oracle_mismatches_total": 0,
+      "duration_seconds": 301
+    }
+  },
+  "total_iters": 74417672,
+  "total_crashes": 2,
+  "total_hangs": 0,
+  "total_oom": 0,
+  "total_oracle_mismatches": 2,
+  "known_findings_reproduced": [
+    {
+      "id": "VULN_AUDIT_F1",
+      "severity": "High",
+      "description": "MOD_11_2.compute(X-in-body) raises raw ValueError instead of ISO7064Error (SPEC \u00a76 AC9 violation)",
+      "reproducer_inputs": [
+        "X794",
+        "1234X567"
+      ],
+      "reproducer_files": [
+        "cycle_138/adversary/fuzz/crashes/per_system/crash-1ae44bdd97c5f7690dce1dd14f2083e5451a52da",
+        "cycle_138/adversary/fuzz/crashes/per_system/crash-f8f1862b450dd4ee99f2b4f73ecc93e41850d443"
+      ],
+      "minimized_by": "atheris/libFuzzer automatic minimization"
+    }
+  ],
+  "all_other_surfaces_clean": true,
+  "notes": [
+    "Five surfaces fuzzed in parallel for 300s wall budget each (per_surface budget = 5 minutes).",
+    "per_system exited early (~46s) when the harness's intentional crash-on-first-finding logic tripped on the MOD_11_2 X-in-body reproducer (input '1234X567').",
+    "compute ran 25,680,711 iters in 301s with no crashes.",
+    "alphabet ran 27,407,132 iters in 301s with no crashes (cov plateaued at 64/77 within first 30s \u2014 alphabet surface is small).",
+    "verify ran 21,308,624 iters in 301s with no crashes.",
+    "cli ran 21,205 iters in 301s with no crashes (subprocess-bound, 60-65 iters/s).",
+    "All crashes observed are reproductions of the T1 VULN_AUDIT F1 finding (MOD_11_2 X-in-body) \u2014 no new findings surfaced."
+  ],
+  "worker_session_id": "20260928_084230_t3_corpus",
+  "reproducer_files_per_finding": {
+    "VULN_AUDIT_F1": [
+      "cycle_138/adversary/fuzz/crashes/per_system/crash-1ae44bdd97c5f7690dce1dd14f2083e5451a52da",
+      "cycle_138/adversary/fuzz/crashes/per_system/crash-f8f1862b450dd4ee99f2b4f73ecc93e41850d443"
+    ]
+  },
+  "surfaces_covered": 5
+}

@@ -1,0 +1,55 @@
+INFO: Using built-in libfuzzer
+WARNING: Failed to find function "__sanitizer_acquire_crash_state".
+WARNING: Failed to find function "__sanitizer_print_stack_trace".
+WARNING: Failed to find function "__sanitizer_set_death_callback".
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 2473235460
+INFO:       58 files found in cycle_138/adversary/fuzz/corpus/cli/
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 4096 bytes
+INFO: seed corpus: files: 58 min: 1b max: 128b total: 534b rss: 43Mb
+#59	INITED cov: 70 ft: 70 corp: 12/57b exec/s: 59 rss: 43Mb
+#60	REDUCE cov: 70 ft: 70 corp: 12/54b lim: 9 exec/s: 60 rss: 43Mb L: 6/8 MS: 1 EraseBytes-
+#61	REDUCE cov: 70 ft: 70 corp: 12/53b lim: 9 exec/s: 61 rss: 43Mb L: 3/8 MS: 1 EraseBytes-
+#64	REDUCE cov: 70 ft: 70 corp: 12/52b lim: 9 exec/s: 64 rss: 43Mb L: 3/8 MS: 3 ShuffleBytes-ChangeByte-EraseBytes-
+#67	REDUCE cov: 70 ft: 70 corp: 12/50b lim: 9 exec/s: 67 rss: 43Mb L: 6/8 MS: 3 CMP-InsertByte-EraseBytes- DE: "\001\000\000\000\000\000\000\000"-
+#80	REDUCE cov: 70 ft: 70 corp: 12/49b lim: 9 exec/s: 80 rss: 43Mb L: 2/8 MS: 3 ShuffleBytes-ShuffleBytes-EraseBytes-
+#121	REDUCE cov: 70 ft: 70 corp: 12/48b lim: 9 exec/s: 121 rss: 43Mb L: 2/8 MS: 1 EraseBytes-
+#128	pulse  cov: 70 ft: 70 corp: 12/48b lim: 9 exec/s: 64 rss: 43Mb
+#146	REDUCE cov: 70 ft: 70 corp: 12/46b lim: 9 exec/s: 73 rss: 43Mb L: 2/8 MS: 3 ChangeByte-ShuffleBytes-EraseBytes-
+#161	REDUCE cov: 70 ft: 70 corp: 12/45b lim: 9 exec/s: 80 rss: 43Mb L: 3/8 MS: 5 CopyPart-EraseBytes-EraseBytes-ChangeBinInt-EraseBytes-
+#182	REDUCE cov: 70 ft: 70 corp: 12/44b lim: 9 exec/s: 91 rss: 43Mb L: 2/8 MS: 1 EraseBytes-
+#202	REDUCE cov: 70 ft: 70 corp: 12/43b lim: 9 exec/s: 67 rss: 43Mb L: 5/8 MS: 4 ShuffleBytes-ShuffleBytes-ChangeByte-CrossOver-
+#245	REDUCE cov: 70 ft: 70 corp: 12/42b lim: 9 exec/s: 81 rss: 43Mb L: 2/8 MS: 3 CopyPart-CopyPart-EraseBytes-
+#256	pulse  cov: 70 ft: 70 corp: 12/42b lim: 9 exec/s: 64 rss: 43Mb
+#322	REDUCE cov: 70 ft: 70 corp: 12/40b lim: 9 exec/s: 64 rss: 43Mb L: 6/6 MS: 1 EraseBytes-
+#376	REDUCE cov: 70 ft: 70 corp: 12/39b lim: 9 exec/s: 62 rss: 43Mb L: 5/6 MS: 4 ChangeBinInt-CopyPart-ChangeASCIIInt-EraseBytes-
+#377	REDUCE cov: 70 ft: 70 corp: 12/37b lim: 9 exec/s: 62 rss: 43Mb L: 2/6 MS: 1 EraseBytes-
+#414	NEW    cov: 72 ft: 72 corp: 13/43b lim: 9 exec/s: 59 rss: 43Mb L: 6/6 MS: 2 InsertRepeatedBytes-EraseBytes-
+#512	pulse  cov: 72 ft: 72 corp: 13/43b lim: 9 exec/s: 64 rss: 43Mb
+#516	REDUCE cov: 72 ft: 72 corp: 13/41b lim: 9 exec/s: 64 rss: 43Mb L: 3/6 MS: 2 ShuffleBytes-EraseBytes-
+#605	REDUCE cov: 72 ft: 72 corp: 13/40b lim: 9 exec/s: 60 rss: 43Mb L: 3/6 MS: 4 CopyPart-InsertByte-EraseBytes-EraseBytes-
+#837	REDUCE cov: 72 ft: 72 corp: 13/38b lim: 9 exec/s: 59 rss: 43Mb L: 4/6 MS: 2 InsertByte-EraseBytes-
+#848	REDUCE cov: 72 ft: 72 corp: 13/36b lim: 9 exec/s: 60 rss: 43Mb L: 1/6 MS: 1 CrossOver-
+#952	REDUCE cov: 72 ft: 72 corp: 13/35b lim: 9 exec/s: 59 rss: 43Mb L: 5/5 MS: 4 EraseBytes-ShuffleBytes-ChangeBit-CrossOver-
+#973	REDUCE cov: 72 ft: 72 corp: 13/34b lim: 9 exec/s: 60 rss: 43Mb L: 2/5 MS: 1 CrossOver-
+#1024	pulse  cov: 72 ft: 72 corp: 13/34b lim: 9 exec/s: 60 rss: 43Mb
+#1036	REDUCE cov: 72 ft: 72 corp: 13/32b lim: 9 exec/s: 60 rss: 43Mb L: 2/5 MS: 3 ChangeByte-ChangeASCIIInt-EraseBytes-
+#1112	REDUCE cov: 72 ft: 72 corp: 13/31b lim: 9 exec/s: 61 rss: 43Mb L: 4/5 MS: 1 EraseBytes-
+#2048	pulse  cov: 72 ft: 72 corp: 13/31b lim: 18 exec/s: 62 rss: 43Mb
+#3822	REDUCE cov: 72 ft: 72 corp: 13/30b lim: 34 exec/s: 63 rss: 43Mb L: 4/4 MS: 5 CrossOver-EraseBytes-ShuffleBytes-ChangeBit-CMP- DE: "\001\000\000\000"-
+#4096	pulse  cov: 72 ft: 72 corp: 13/30b lim: 34 exec/s: 65 rss: 43Mb
+#5983	REDUCE cov: 73 ft: 73 corp: 14/80b lim: 54 exec/s: 65 rss: 43Mb L: 50/50 MS: 1 InsertRepeatedBytes-
+#6189	REDUCE cov: 73 ft: 73 corp: 14/75b lim: 54 exec/s: 65 rss: 43Mb L: 45/45 MS: 1 EraseBytes-
+#6625	REDUCE cov: 73 ft: 73 corp: 14/61b lim: 54 exec/s: 66 rss: 43Mb L: 31/31 MS: 1 EraseBytes-
+#6704	REDUCE cov: 73 ft: 73 corp: 14/58b lim: 54 exec/s: 65 rss: 43Mb L: 28/28 MS: 4 CrossOver-ChangeByte-ShuffleBytes-EraseBytes-
+#8192	pulse  cov: 73 ft: 73 corp: 14/58b lim: 64 exec/s: 67 rss: 43Mb
+#9547	REDUCE cov: 73 ft: 73 corp: 14/45b lim: 82 exec/s: 67 rss: 43Mb L: 15/15 MS: 3 ChangeBit-ChangeASCIIInt-EraseBytes-
+#9753	REDUCE cov: 73 ft: 73 corp: 14/38b lim: 82 exec/s: 67 rss: 43Mb L: 8/8 MS: 1 EraseBytes-
+#10105	REDUCE cov: 73 ft: 73 corp: 14/34b lim: 82 exec/s: 67 rss: 43Mb L: 4/4 MS: 2 ShuffleBytes-EraseBytes-
+#16384	pulse  cov: 73 ft: 73 corp: 14/34b lim: 144 exec/s: 69 rss: 43Mb
+#21205	DONE   cov: 73 ft: 73 corp: 14/34b lim: 186 exec/s: 70 rss: 43Mb
+###### Recommended dictionary. ######
+"\001\000\000\000\000\000\000\000" # Uses: 732
+"\001\000\000\000" # Uses: 660
+###### End of recommended dictionary. ######
+Done 21205 runs in 301 second(s)

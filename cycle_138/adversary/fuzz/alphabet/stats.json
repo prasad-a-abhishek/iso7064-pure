@@ -1,0 +1,20 @@
+{
+  "cycle_id": 138,
+  "phase": "T3_corpus_run",
+  "surface": "alphabet",
+  "harness": "harness_alphabet.py",
+  "wall_budget_seconds": 300,
+  "iterations": 27407132,
+  "duration_seconds": 301,
+  "cov_edges": 64,
+  "cov_features": 77,
+  "corpus_inputs_total": 12,
+  "corpus_size_bytes": 20,
+  "crashes_total": 0,
+  "hangs_total": 0,
+  "oom_total": 0,
+  "oracle_mismatches_total": 0,
+  "crash_files": [],
+  "log_path": "cycle_138/adversary/fuzz/logs/alphabet/corpus_run.log",
+  "corpus_path": "cycle_138/adversary/fuzz/corpus/alphabet/"
+}

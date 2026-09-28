@@ -1,0 +1,23 @@
+INFO: Instrumenting iso7064_pure
+INFO: Instrumenting iso7064_pure._alphabet
+INFO: Instrumenting iso7064_pure._systems
+INFO: Using built-in libfuzzer
+WARNING: Failed to find function "__sanitizer_acquire_crash_state".
+WARNING: Failed to find function "__sanitizer_print_stack_trace".
+WARNING: Failed to find function "__sanitizer_set_death_callback".
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 737511085
+INFO:      134 files found in cycle_138/adversary/fuzz/corpus/alphabet/
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 4096 bytes
+INFO: seed corpus: files: 134 min: 1b max: 6b total: 195b rss: 42Mb
+#135	INITED cov: 64 ft: 77 corp: 12/21b exec/s: 0 rss: 42Mb
+#10527	REDUCE cov: 64 ft: 77 corp: 12/20b lim: 104 exec/s: 0 rss: 42Mb L: 3/4 MS: 2 EraseBytes-InsertByte-
+#262144	pulse  cov: 64 ft: 77 corp: 12/20b lim: 2600 exec/s: 131072 rss: 42Mb
+#524288	pulse  cov: 64 ft: 77 corp: 12/20b lim: 4096 exec/s: 104857 rss: 42Mb
+#1048576	pulse  cov: 64 ft: 77 corp: 12/20b lim: 4096 exec/s: 95325 rss: 42Mb
+#2097152	pulse  cov: 64 ft: 77 corp: 12/20b lim: 4096 exec/s: 91180 rss: 42Mb
+#4194304	pulse  cov: 64 ft: 77 corp: 12/20b lim: 4096 exec/s: 91180 rss: 42Mb
+#8388608	pulse  cov: 64 ft: 77 corp: 12/20b lim: 4096 exec/s: 91180 rss: 42Mb
+#16777216	pulse  cov: 64 ft: 77 corp: 12/20b lim: 4096 exec/s: 91180 rss: 42Mb
+#27407132	DONE   cov: 64 ft: 77 corp: 12/20b lim: 4096 exec/s: 91053 rss: 42Mb
+Done 27407132 runs in 301 second(s)

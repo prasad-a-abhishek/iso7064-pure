@@ -1,0 +1,24 @@
+{
+  "cycle_id": 138,
+  "phase": "T3_corpus_run",
+  "surface": "per_system",
+  "harness": "harness_per_system.py",
+  "wall_budget_seconds": 300,
+  "iterations": 0,
+  "duration_seconds": 46,
+  "cov_edges": null,
+  "cov_features": null,
+  "corpus_inputs_total": 35,
+  "corpus_size_bytes": null,
+  "crashes_total": 2,
+  "hangs_total": 0,
+  "oom_total": 0,
+  "oracle_mismatches_total": 2,
+  "crash_files": [
+    "crash-1ae44bdd97c5f7690dce1dd14f2083e5451a52da",
+    "crash-f8f1862b450dd4ee99f2b4f73ecc93e41850d443"
+  ],
+  "log_path": "cycle_138/adversary/fuzz/logs/per_system/corpus_run.log",
+  "corpus_path": "cycle_138/adversary/fuzz/corpus/per_system/",
+  "exit_reason": "fuzzer exited after first AssertionError (F1 X-in-body MOD_11_2 crash) \u2014 harness intentionally exits on first known-bug crash to preserve crash artifact (per harness_per_system.py docstring)"
+}

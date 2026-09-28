@@ -1,0 +1,20 @@
+{
+  "cycle_id": 138,
+  "phase": "T3_corpus_run",
+  "surface": "compute",
+  "harness": "harness_compute.py",
+  "wall_budget_seconds": 300,
+  "iterations": 25680711,
+  "duration_seconds": 301,
+  "cov_edges": 253,
+  "cov_features": 598,
+  "corpus_inputs_total": 110,
+  "corpus_size_bytes": 1016,
+  "crashes_total": 0,
+  "hangs_total": 0,
+  "oom_total": 0,
+  "oracle_mismatches_total": 0,
+  "crash_files": [],
+  "log_path": "cycle_138/adversary/fuzz/logs/compute/corpus_run.log",
+  "corpus_path": "cycle_138/adversary/fuzz/corpus/compute/"
+}
