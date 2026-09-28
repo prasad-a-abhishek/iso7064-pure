@@ -215,6 +215,13 @@ class _Mod11_2(System):
     def _check_character_impl(self, data: str) -> str:
         total = 0
         for i, ch in enumerate(data):
+            if ch == "X":
+                raise ISO7064Error(
+                    f"check character 'X' (value 10) is not allowed in the body "
+                    f"of MOD_11_2; 'X' may only appear as the trailing check "
+                    f"character (e.g. '043942089X'). Got body containing 'X' "
+                    f"at position {i}."
+                )
             total += int(ch) * (10 - i)
         check = (11 - (total % 11)) % 11
         return "X" if check == 10 else str(check)

@@ -153,3 +153,52 @@ class TestMod11_2_Dispatch:
         assert verify("0306406152", mode=Mode.MOD_11_2) == MOD_11_2.verify(
             "0306406152"
         )
+
+
+class TestMod11_2_XInBody:
+    """Regression coverage for cycle_138 V001 (F-001 + F-002 from @repo-adversary).
+
+    The MOD 11-2 system accepts the letter "X" as a *legal* check character
+    (it represents the value 10). However, ISO/IEC 7064:2021 §6 forbids "X"
+    from appearing in the *body* of a MOD 11-2 string — "X" may only appear
+    as the final check character. Prior to v0.1.1, ``_check_character_impl``
+    called ``int('X')`` unguarded, which raised a raw ``ValueError`` instead
+    of the SPEC §6 AC9-contract :class:`ISO7064Error`.
+    """
+
+    def test_x_in_body_raises_iso7064_error(self):
+        with pytest.raises(ISO7064Error) as excinfo:
+            MOD_11_2.compute("X794")
+        msg = str(excinfo.value)
+        assert "not allowed in the body" in msg
+        assert "X" in msg
+
+        with pytest.raises(ISO7064Error) as excinfo_cc:
+            MOD_11_2.check_character("X794")
+        assert "not allowed in the body" in str(excinfo_cc.value)
+
+    def test_x_in_body_mid_position_raises_iso7064_error(self):
+        # F002 reproducer: 'X' in the middle of the body (not just position 0).
+        with pytest.raises(ISO7064Error) as excinfo:
+            MOD_11_2.compute("1234X567")
+        msg = str(excinfo.value)
+        assert "not allowed in the body" in msg
+        # The error must report the position to aid diagnosis.
+        assert "position 4" in msg
+
+    def test_x_in_body_verify_returns_false(self):
+        # verify() catches ISO7064Error -> False (canonical contract).
+        # X-in-body must NOT raise; it must return False.
+        assert MOD_11_2.verify("X794") is False
+        assert MOD_11_2.verify("1234X567") is False
+
+    def test_x_in_body_dispatch_raises_iso7064_error(self):
+        # Top-level compute() dispatch must also raise ISO7064Error (not
+        # ValueError leaking through the dispatch layer).
+        with pytest.raises(ISO7064Error) as excinfo:
+            compute("X794", mode=Mode.MOD_11_2)
+        assert "not allowed in the body" in str(excinfo.value)
+
+        # Top-level verify() dispatch: returns False (does NOT raise).
+        assert verify("X794", mode=Mode.MOD_11_2) is False
+        assert verify("1234X567", mode=Mode.MOD_11_2) is False

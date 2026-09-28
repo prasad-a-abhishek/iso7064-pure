@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "iso7064-pure"
-version = "0.1.0"
+version = "0.1.1"
 description = "Zero-dependency ISO/IEC 7064:2021 check character systems (MOD 11-2 / MOD 37-2 / MOD 97-10 / MOD 661-26 / MOD 1271-36)"
 readme = "README.md"
 license = {text = "MIT"}
