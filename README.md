@@ -45,29 +45,40 @@ $ python -m iso7064_pure verify "GB82WEST12345698765499" --mode 97-10; echo $?
 
 ## ⚡ Performance & Benchmarks
 
-Measured on Python 3.11.15 (CPython), Linux aarch64, 50 iterations per workload using `time.perf_counter` and `tracemalloc` peak.
-
-| Workload | iso7064-pure | `stdnum` (PyPI) | hand-rolled `int(s) % 11` |
-|----------|-------------:|----------------:|--------------------------:|
-| ISBN-10 `MOD_11_2.compute("030640615")` | **0.78 µs** | 2.41 µs | **wrong** (no recursive weighting; flat `int % 11` fails AC3) |
-| IBAN `MOD_97_10.verify("GB82WEST...")` | **1.85 µs** | 3.72 µs | n/a (hand-rolled mods don't cover MOD 97-10) |
-| ISIN `MOD_661_26.compute("US037833100")` | **1.42 µs** | 4.15 µs | n/a (hand-rolled `int % 661` ignores A=10 expansion) |
-| CUSIP `MOD_661_26.verify("0378331005")` | **1.38 µs** | 3.91 µs | n/a |
-| ISBN-10 X vector `MOD_11_2.verify("043942089X")` | **0.91 µs** | 2.28 µs | **wrong** (most hand-rolled snippets miss the `X` case) |
-| Bulk 1,000 mixed ISBN-10 | **812 µs** | 2,512 µs | n/a |
-| Bulk 10,000 IBAN | **18.7 ms** | 41.9 ms | n/a |
-| `MOD_1271_36.compute("HELLO")` | **1.51 µs** | n/a (no ISO 7064:2021 MOD 1271-36 support) | n/a |
-| Round-trip `verify(MOD_661_26.compute(x))` over 100 random alphanumeric | **0.21 µs/op** | n/a | n/a |
-
-**Honest interpretation.** `stdnum` is the closest baseline — it covers IBAN/ISBN-10/ISIN through country-specific modules but does not expose the underlying MOD 11-2 / MOD 97-10 / MOD 661-26 systems as a general-purpose family (you must know it's an ISBN vs IBAN up-front). Hand-rolled `int(s) % 11` snippets on StackOverflow fail three of the spec's defining requirements: (a) **no recursive weighting** (ISO 7064 MOD 11-2 re-encodes the result of one iteration back into the alphabet), (b) **no alphabetic-to-numeric expansion** for MOD 661-26 (A=10, B=11, …, Z=35 — required for CUSIP and ISIN), and (c) **no support for the `X` check character** in ISBN-10 when the value is exactly 10. `iso7064-pure` is 2.2–3.0× faster than `stdnum` on the equivalent operations, supports all five systems through one uniform API, and is the only library in this comparison that implements MOD 1271-36 (the ISO 7064:2021 future-proof system).
+Measured on Python 3.11.15 (CPython), Linux x86_64, 5 runs of 10,000
+iterations per workload using `time.perf_counter()` and `tracemalloc`
+peak. Numbers are recorded live by the harness — see
+[`benchmarks/BENCHMARK.md`](benchmarks/BENCHMARK.md) for the full
+self-populated table.
 
 Replicate:
 
 ```bash
-python3 benchmarks/run_benchmark.py
+python3 benchmarks/run_benchmark.py            # 10,000 iters × 5 runs per workload
+python3 benchmarks/run_benchmark.py --iters 1000 --runs 3   # quick smoke
 ```
 
-Full table at [`benchmarks/BENCHMARK.md`](benchmarks/BENCHMARK.md).
+The fuzz harness confirms algorithmic correctness at scale:
+
+```bash
+python3 benchmarks/fuzz_iso7064.py             # 100,000 iters per surface
+python3 benchmarks/fuzz_iso7064.py --iters 500 # quick smoke
+```
+
+**Honest interpretation.** Throughput numbers in
+[`benchmarks/BENCHMARK.md`](benchmarks/BENCHMARK.md) vary by workload
+profile: `iso7064-pure` is roughly **on par** with `stdnum` on the
+recurrent systems it shares (MOD 11-2 / MOD 37-2 / MOD 97-10 /
+MOD 1271-36) but `stdnum` is faster on the Luhn-style MOD 661-26 ISIN/
+CUSIP path because `stdnum` reuses an internal C-backed Luhn helper
+while our pure-Python implementation processes the alphanumeric
+expansion in a Python loop. `iso7064-pure` is the only library in this
+comparison that implements **MOD 1271-36** (the ISO 7064:2021 future-
+proof system) at all — `stdnum` does not implement that system, so
+that row is a wash. The benchmark **does not** compare against hand-
+rolled `int(s) % 11` snippets because those snippets are algorithmically
+wrong (no recursive weighting, no alphabetic expansion, no `X`
+handling) and any speed comparison would be meaningless.
 
 ## Why iso7064-pure?
 
