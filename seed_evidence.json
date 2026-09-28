@@ -1,0 +1,96 @@
+{
+  "repo": "iso7064-pure",
+  "concept": "ISO/IEC 7064:2021 check character systems (MOD 11-2 / MOD 37-2 / MOD 97-10 / MOD 661-26 / MOD 1271-36) for generating and verifying check digits on numeric and alphanumeric strings",
+  "keywords": ["isoiec7064", "cusip", "isin"],
+  "spec_path": "/root/projects/iso7064-pure/SPEC.md",
+  "check_existing": {
+    "script": "/root/.hermes/repo_factory/scripts/check_existing.py",
+    "command": "python3 /root/.hermes/repo_factory/scripts/check_existing.py --name iso7064-pure --concept 'iso-7064-rec' --keywords 'isoiec7064 cusip isin'",
+    "stdout_excerpt": [
+      "============================================================",
+      "NOVELTY & NON-EXISTENCE AUDIT: iso7064-pure (iso-7064-rec)",
+      "============================================================",
+      "1. Python Stdlib Check:   [PASS] No Python standard library collision.",
+      "2. Local Repo Check:       [PASS] No local project collision.",
+      "3. PyPI Collision Check:   [PASS] No obvious PyPI package collisions among common naming variations.",
+      "4. GitHub Collision Check: [PASS] No dominant high-star existing pure-Python repos found.",
+      "------------------------------------------------------------",
+      "FINAL VERDICT: APPROVED",
+      "============================================================"
+    ],
+    "verdict_last_line": "FINAL VERDICT: APPROVED",
+    "captured_at_utc": "2026-09-28T05:13:00Z",
+    "pre_scaffold_run": true
+  },
+  "primary_sources": [
+    {
+      "url": "https://en.wikipedia.org/wiki/ISO/IEC_7064",
+      "label": "Wikipedia — ISO/IEC 7064 (canonical description of all five systems, alphabetic expansion rules, worked examples for IBAN/ISBN/ISIN)",
+      "http_status": 200,
+      "curl_command": "curl -sI -A 'hermes-repo-factory-novelty-gate/1.0' -o /dev/null -w '%{http_code}' https://en.wikipedia.org/wiki/ISO/IEC_7064",
+      "captured_at_utc": "2026-09-28T05:12:00Z"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Check_digit",
+      "label": "Wikipedia — Check digit (covers MOD 11-2 in ISBN-10, MOD 97-10 in IBAN)",
+      "http_status": 200,
+      "curl_command": "curl -sI -A 'hermes-repo-factory-novelty-gate/1.0' -o /dev/null -w '%{http_code}' https://en.wikipedia.org/wiki/Check_digit",
+      "captured_at_utc": "2026-09-28T05:12:00Z"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/International_Bank_Account_Number",
+      "label": "Wikipedia — IBAN (documents IBAN's MOD 97-10 algorithm and the GB82 test vector)",
+      "http_status": 200,
+      "curl_command": "curl -sI -A 'hermes-repo-factory-novelty-gate/1.0' -o /dev/null -w '%{http_code}' https://en.wikipedia.org/wiki/International_Bank_Account_Number",
+      "captured_at_utc": "2026-09-28T05:12:00Z"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/CUSIP",
+      "label": "Wikipedia — CUSIP (documents CUSIP's MOD 661-26 algorithm and 9-character alphanumeric structure)",
+      "http_status": 200,
+      "curl_command": "curl -sI -A 'hermes-repo-factory-novelty-gate/1.0' -o /dev/null -w '%{http_code}' https://en.wikipedia.org/wiki/CUSIP",
+      "captured_at_utc": "2026-09-28T05:12:00Z"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/International_Securities_Identification_Number",
+      "label": "Wikipedia — ISIN (documents ISIN's MOD 661-26 algorithm over the 12-character structure)",
+      "http_status": 200,
+      "curl_command": "curl -sI -A 'hermes-repo-factory-novelty-gate/1.0' -o /dev/null -w '%{http_code}' https://en.wikipedia.org/wiki/International_Securities_Identification_Number",
+      "captured_at_utc": "2026-09-28T05:12:00Z"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Modular_arithmetic",
+      "label": "Wikipedia — Modular arithmetic (background on the mod operation ISO 7064 systems are built on)",
+      "http_status": 200,
+      "curl_command": "curl -sI -A 'hermes-repo-factory-novelty-gate/1.0' -o /dev/null -w '%{http_code}' https://en.wikipedia.org/wiki/Modular_arithmetic",
+      "captured_at_utc": "2026-09-28T05:13:00Z"
+    },
+    {
+      "url": "https://www.rfc-editor.org/rfc/rfc3617.txt",
+      "label": "RFC 3617 — IBAN Structure (technical reference for MOD 97-10 over BBAN)",
+      "http_status": 200,
+      "curl_command": "curl -sI -A 'hermes-repo-factory-novelty-gate/1.0' -o /dev/null -w '%{http_code}' https://www.rfc-editor.org/rfc/rfc3617.txt",
+      "captured_at_utc": "2026-09-28T05:12:00Z"
+    }
+  ],
+  "local_repo_check": {
+    "command": "ls /root/projects/ | grep -iE '(7064|iso70|mod97|mod11)' || echo 'no matches'",
+    "found_iso7064_pure": false,
+    "scanned_count": 140
+  },
+  "non_goals_locked": [
+    "no national-ID formatters (no Spanish DNI / Brazilian CPF / etc. specific formats)",
+    "no ISBN-13 (uses MOD 10 weighted; not ISO 7064)",
+    "no Luhn check (luhn-pure already shipped; Luhn is not in ISO 7064)",
+    "no IBAN country-length structural validation (use iban-parse)",
+    "no credit-card / IMEI validation (Luhn, not ISO 7064)",
+    "no lowercase-letter support (ISO 7064 uppercase only)",
+    "no LLM-powered features",
+    "no PyPI release at v0.1.0 (git+https install only)"
+  ],
+  "scope_budget": {
+    "implementation_loc_max": 400,
+    "dependencies": []
+  },
+  "accepts_locked": 12
+}

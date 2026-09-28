@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "iso7064-pure"
+version = "0.1.0"
+description = "Zero-dependency ISO/IEC 7064:2021 check character systems (MOD 11-2 / MOD 37-2 / MOD 97-10 / MOD 661-26 / MOD 1271-36)"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+authors = [
+    {name = "iso7064-pure authors"},
+]
+keywords = [
+    "iso-7064",
+    "check-digit",
+    "check-character",
+    "mod11-2",
+    "mod97-10",
+    "mod661-26",
+    "isbn-10",
+    "iban",
+    "isin",
+    "cusip",
+    "isbn",
+    "banking",
+    "securities",
+    "parser",
+    "validator",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Utilities",
+    "Typing :: Typed",
+]
+
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/prasad-a-abhishek/iso7064-pure"
+Repository = "https://github.com/prasad-a-abhishek/iso7064-pure"
+
+[project.scripts]
+iso7064-pure = "iso7064_pure.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+iso7064_pure = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
