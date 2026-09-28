@@ -1,6 +1,6 @@
 # iso7064-pure
 
-[![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/prasad-a-abhishek/iso7064-pure)
+[![Version](https://img.shields.io/badge/version-0.1.1-blue.svg)](https://github.com/prasad-a-abhishek/iso7064-pure)
 [![Python](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen.svg)](#key-features)
