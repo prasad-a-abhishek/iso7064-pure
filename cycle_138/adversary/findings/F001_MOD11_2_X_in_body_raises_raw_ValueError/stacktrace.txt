@@ -1,0 +1,54 @@
+Stack trace for F001 — captured by:
+    PYTHONPATH=src python3 cycle_138/adversary/findings/F001_MOD11_2_X_in_body_raises_raw_ValueError/minimized.py
+
+Captured: 2026-09-28 (cycle_138 T4 triage)
+Surface: per_system
+Minimized input: "X794" (4 bytes)
+Fuzzer crash artifact SHA-256 fingerprint: 1ae44bdd97c5f7690dce1dd14f2083e5451a52da
+
+--------------------------------------------------------------------------
+Full traceback (stdout + stderr merged):
+--------------------------------------------------------------------------
+
+Traceback (most recent call last):
+  File ".../cycle_138/adversary/findings/F001_MOD11_2_X_in_body_raises_raw_ValueError/minimized.py", line 32, in <module>
+    out = MOD_11_2.compute(DATA)
+  File ".../src/iso7064_pure/_systems.py", line 147, in compute
+    return data + self._check_character_impl(data)
+  File ".../src/iso7064_pure/_systems.py", line 218, in _check_character_impl
+    total += int(ch) * (10 - i)
+             ^^^^^^^
+ValueError: invalid literal for int() with base 10: 'X'
+
+--------------------------------------------------------------------------
+Analysis
+--------------------------------------------------------------------------
+
+Root cause:
+  src/iso7064_pure/_systems.py:218 (in _Mod11_2._check_character_impl):
+      total += int(ch) * (10 - i)
+
+  When `ch` is the alphabetic 'X' (allowed only as the CHECK character
+  in MOD_11_2, never in the body), `int(ch)` raises ValueError. The
+  surrounding `compute()` (line 147) does not catch this — only `verify()`
+  has a catch block at line 162-167. There is no `try: ... except
+  ValueError: raise ISO7064Error(...)` wrapper.
+
+Call chain:
+  compute(data)
+    -> data + self._check_character_impl(data)            [_systems.py:147]
+       -> for i, ch in enumerate(data): total += int(ch)  [_systems.py:218]
+          -> int('X') raises ValueError (CPython builtin)
+
+Spec violation:
+  SPEC §6 AC9: "All systems raise ISO7064Error on invalid input."
+  Actual: raw ValueError propagates uncaught.
+
+Severity rationale:
+  High — a SPEC contract violation in the canonical public API entrypoint.
+  Users who catch only `ISO7064Error` (the documented contract) will have
+  their exception handlers skipped, which can leak stack traces to logs,
+  trigger generic "internal error" pages, or break retry/backoff logic
+  that assumes errors are part of the ISO7064Error hierarchy.
+  Not Critical (no RCE / no secret leak / no DoS) and not Medium (not
+  an edge-case oracle mismatch — this is the documented behavior contract).

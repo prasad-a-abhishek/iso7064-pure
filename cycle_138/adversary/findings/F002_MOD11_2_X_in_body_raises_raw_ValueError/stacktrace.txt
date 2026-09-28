@@ -1,0 +1,56 @@
+Stack trace for F002 — captured by:
+    PYTHONPATH=src python3 cycle_138/adversary/findings/F002_MOD11_2_X_in_body_raises_raw_ValueError/minimized.py
+
+Captured: 2026-09-28 (cycle_138 T4 triage)
+Surface: per_system
+Minimized input: "1234X567" (8 bytes; fuzzer-discovered)
+Fuzzer crash artifact SHA-256 fingerprint: f8f1862b450dd4ee99f2b4f73ecc93e41850d443
+Fuzzer reproduction context (from T3 corpus_run.log):
+    artifact_prefix='cycle_138/adversary/fuzz/artifacts/per_system/'
+    Test unit written to cycle_138/adversary/fuzz/artifacts/per_system/crash-f8f1862b450dd4ee99f2b4f73ecc93e41850d443
+    Base64: MTIzNFg1Njc=
+    0x31,0x32,0x33,0x34,0x58,0x35,0x36,0x37,
+
+--------------------------------------------------------------------------
+Full traceback (stdout + stderr merged):
+--------------------------------------------------------------------------
+
+Traceback (most recent call last):
+  File ".../cycle_138/adversary/findings/F002_MOD11_2_X_in_body_raises_raw_ValueError/minimized.py", line 39, in <module>
+    out = MOD_11_2.compute(DATA)
+  File ".../src/iso7064_pure/_systems.py", line 147, in compute
+    return data + self._check_character_impl(data)
+  File ".../src/iso7064_pure/_systems.py", line 218, in _check_character_impl
+    total += int(ch) * (10 - i)
+             ^^^^^^^
+ValueError: invalid literal for int() with base 10: 'X'
+
+--------------------------------------------------------------------------
+Analysis
+--------------------------------------------------------------------------
+
+Same root cause as F001 (V001 in VULN_AUDIT.md):
+  src/iso7064_pure/_systems.py:218 — `int(ch)` on alphabetic body 'X'.
+
+Independent fuzzer discovery:
+  F002 was discovered by the Atheris/libFuzzer run during T3 corpus_run
+  on the per_system surface. The fuzzer reached this input via mutation
+  starting from the seed corpus — confirming the bug is reachable
+  through normal fuzzing traffic, not only through hand-crafted probes.
+
+Why two finding entries (F001 + F002)?
+  Both inputs reproduce the same underlying bug, but each is a distinct
+  crash artifact from the fuzzer's perspective (different SHA-256, different
+  corpus state at time of discovery). Splitting preserves the audit trail:
+  - F001 = manual reproducer from VULN_AUDIT V001 (4-byte input "X794")
+  - F002 = fuzzer-discovered reproducer (8-byte input "1234X567")
+  If a future fix lands, both folders must close together. If a regression
+  introduces a new failure mode, splitting makes it easier to see which
+  input vector is involved.
+
+Severity rationale: same as F001 → High.
+  - SPEC §6 AC9 contract violation.
+  - Public API `compute()` is the canonical entrypoint.
+  - Exploitable trivially (any caller passing ISBN-style strings with
+    embedded 'X' before the check-character position trips it).
+  - Does NOT cross Critical boundary (no RCE, no secret leak, no DoS).
